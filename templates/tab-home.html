@@ -1,8 +1,11 @@
 <ion-view title="Pesquisa de Domínio">
-    <ion-content>
+    <ion-content class="padding">
+    	<div align="center">
+    		<h3>Pesquisa de domínios com extensão .br</h3>
+    	</div>
         <div class="list list-inset">
             <label class="item item-input">
-                <input type="text" placeholder="Domínio" ng-model="dataDomain.domain">
+                <input type="text" id="search-text" placeholder="Domínio" ng-model="dataDomain.domain">
             </label>
             <label class="item item-input item-select">
                 <div class="input-label">
@@ -89,9 +92,12 @@
                     {{fulldomain}}
                 </div>
                 <div class="item item-text-wrap">
-                    {{message}}
-                    <br />
-                    <a href="http://google.com/" target="_blank">Click</a>
+                    <div ng-hide="showRegister">
+                    	{{message}}
+                    </div>
+                    <button class="button button-block button-balanced" ng-show="showRegister" ng-click="registerDomain(fulldomain)">
+					  REGISTRAR
+					</button>
                 </div>
             </div>
         </div>

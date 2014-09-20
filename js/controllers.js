@@ -7,6 +7,7 @@ checkdomain.controller('HomeCtrl', function($scope, $ionicPopup, $http) {
     };
 
     $scope.showResult = false;
+    $scope.showRegister = false;
 
     $scope.searchDomain = function() {
         if ($scope.dataDomain.domain == "") {
@@ -18,8 +19,12 @@ checkdomain.controller('HomeCtrl', function($scope, $ionicPopup, $http) {
             $http
                 .post('http://cryptic-peak-3065.herokuapp.com', $scope.dataDomain)
                 .success(function(response) {
-                    console.log(response);
                     if (response.message != "" && response.message != null) {
+                    	$scope.showRegister = false;
+
+                    	if(response.data.status == 0 || response.data.status == 1)
+                    		$scope.showRegister = true;
+
                         $scope.fulldomain = response.data.fqdn;
                         $scope.message = response.message;
                         $scope.showResult = true;
@@ -32,6 +37,16 @@ checkdomain.controller('HomeCtrl', function($scope, $ionicPopup, $http) {
                 });
         }
     }
+
+    $scope.registerDomain = function(fulldomain)
+    {
+    	window.open('https://registro.br/cgi-bin/nicbr/documento?fqdn='+ fulldomain, '_blank', 'location=no');
+    }
 });
 
-checkdomain.controller('AboutCtrl', function($scope) {});
+checkdomain.controller('AboutCtrl', function($scope) {
+	$scope.openSite = function()
+    {
+    	window.open('http://www.devria.com.br', '_blank', 'location=no');
+    }
+});
